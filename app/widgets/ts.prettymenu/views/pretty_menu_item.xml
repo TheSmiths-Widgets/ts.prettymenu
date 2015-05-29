@@ -1,0 +1,7 @@
+<Alloy>
+    <View class="pretty-item" id="prettyItem">
+        <Label class="pretty-scaler" id="prettyScaler" />
+        <Label class="pretty-icon" id="prettyIcon" />
+        <Label class="pretty-title" id="prettyTitle" />
+    </View>
+</Alloy>

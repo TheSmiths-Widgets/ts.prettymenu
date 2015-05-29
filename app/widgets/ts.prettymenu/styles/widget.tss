@@ -1,9 +1,16 @@
-"Label": {
-	color: '#000',
-	font: {
-		fontSize: 18,
-		fontWeight: 'bold'
-	},
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE
+/* ------ Ti.UI.View ------ */
+".pretty-menu": {
+    layout:     "vertical",
+    height:     Ti.UI.SIZE,
+    width:      Ti.UI.FILL
+}
+
+/* ------ Ti.UI.View ------ */
+".pretty-row": {
+    bottom:     "5",
+    center:     { x: "50%" },
+    layout:     "horizontal",
+    height:     Ti.UI.SIZE,
+    top:        "5",
+    width:      Ti.UI.SIZE
 }

@@ -1,3 +1,3 @@
 <Alloy>
-	<Label>I'm the default widget</Label>
+    <View class="pretty-menu" />
 </Alloy>
