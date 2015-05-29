@@ -15,7 +15,7 @@ to their documentation to find which icon is available.
 
 ## Previews 
 
-[screenshot](https://github.com/thesmiths-widgets/ts.prettymenu/blob/doc/images/screenshot.png)
+![screenshot](https://github.com/thesmiths-widgets/ts.prettymenu/blob/doc/images/screenshot.png)
 
 ## How to use
 Please, refer to the [documentation](https://thesmiths-widgets.github.io/ts.prettymenu) for more
