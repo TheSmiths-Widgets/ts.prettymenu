@@ -12,13 +12,14 @@
 /** @readonly @property {Object} icons The list of correspondances between icons names and their ascii code.*/
 $.icons = require(WPATH("fa-icons"));
 
-/** @readonly @property {String} DEFAULT_ID The default id used if no one is provided */
+/** @readonly @property {String} [DEFAULT_ID="default"] The default id used if no one is provided */
 $.DEFAULT_ID = "default";
-/** @readonly @property {String} DEFAULT_ICON The default icon used if no one is provided */
-$.DEFAULT_ICON = __p.file("fa-remove");
-/** @readonly @property {Function} DEFAULT_HANDLER The default handler used if no one is provided */
+/** @readonly @property {String} [DEFAULT_ICON="fa-remove"] The default icon used if no one is provided */
+$.DEFAULT_ICON = "fa-remove";
+/** @readonly @property {Function} [DEFAULT_HANDLER=function(){ Ti.API.warn('Menu uninitialized'); }] 
+ * The default handler used if no one is provided */
 $.DEFAULT_HANDLER = function() {
-    Ti.API.warn("Menu unitialized.");
+    Ti.API.warn("Menu uninitialized.");
 };
 
 /**
