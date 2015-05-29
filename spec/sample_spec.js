@@ -1,7 +1,6 @@
 this._ = Alloy._; this.Backbone = Alloy.Backbone;
 
-var prettyMenus, widget, spyHandler,
-    icons = require('../app/widgets/ts.prettymenu/lib/fa-icons');
+var prettyMenus, widget, spyHandler;
 
 function retrieveRows(widget, index) {
     return index === undefined 
@@ -41,50 +40,50 @@ describe("The pretty menu should be pretty-initialized", function() {
         prettyMenus = {
             classic: [ {
                 id: "1",
-                icon: icons["android"],
+                icon: "android",
                 title: "item1",
                 onClick: spyHandler.handler
             }, {
                 id: "2",
-                icon: icons["windows"],
+                icon: "windows",
                 title: "item2",
                 onClick: spyHandler.handler
             }, {
                 id: "3",
-                icon: icons["apple"],
+                icon: "apple",
                 title: "item3",
                 onClick: spyHandler.handler
             }, {
                 id: "4",
-                icon: icons["github"],
+                icon: "github",
                 title: "item4",
                 onClick: spyHandler.handler
             }, {
                 id: "5",
-                icon: icons["bitbucket"],
+                icon: "bitbucket",
                 title: "item5",
                 onClick: spyHandler.handler
             }, {
                 id: "6",
-                icon: icons["facebook"],
+                icon: "facebook",
                 title: "item6",
                 onClick: spyHandler.handler
             } ],
             noTitle: [ {
                 id: "1",
-                icon: icons["apple"],
+                icon: "apple",
                 onClick: spyHandler.handler
             }, {
                 id: "2",
-                icon: icons["apple"],
+                icon: "apple",
                 onClick: spyHandler.handler
             } ],
             noId: [ {
-                icon: icons["android"],
+                icon: "android",
                 title: "item1",
                 onClick: spyHandler.handler
             }, {
-                icon: icons["windows"],
+                icon: "windows",
                 title: "item2",
                 onClick: spyHandler.handler
             } ],
@@ -96,24 +95,24 @@ describe("The pretty menu should be pretty-initialized", function() {
                 id: "2",
                 title: "item2",
                 onClick: spyHandler.handler
-            } ]),
+            } ],
             noHandler: [ {
                 id: "1",
-                icon: icons["android"],
+                icon: "android",
                 title: "item1"
             }, {
                 id: "2",
-                icon: icons["windows"],
+                icon: "windows",
                 title: "item2"
             } ],
             longTitle: [ {
                 id: "1",
-                icon: icons["android"],
+                icon: "android",
                 title: "A quite long title for the first item",
                 onClick: spyHandler.handler
             }, {
                 id: "2",
-                icon: icons["windows"],
+                icon: "windows",
                 title: "And almost the same for the second one",
                 onClick: spyHandler.handler
             } ]
