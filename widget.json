@@ -1,13 +1,13 @@
 {
 	"id": "ts.prettymenu",
 	"name": "ts.prettymenu",
-	"description" : "",
-	"author": "",
+	"description" : "Fancy menu for your app with FontAwesome",
+	"author": "The Smiths [Matthias Benkort]",
 	"version": "1.0",
-	"copyright":"Copyright (c) 2012",
-	"license":"Public Domain",
+	"copyright":"Copyright (c) 2015",
+	"license":"Apache",
 	"min-alloy-version": "1.0",
 	"min-titanium-version":"2.1",
-	"tags":"",
+	"tags":"menu, thesmiths, fontawesome",
 	"platforms":"android,blackberry,ios,mobileweb"
 }

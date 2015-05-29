@@ -22,7 +22,9 @@ Please, refer to the [documentation](https://thesmiths-widgets.github.io/ts.pret
 details and options.
 
 **index.js**
+
 ```javascript
+
 function handleClick (id) {
     Ti.API.alert("Menu " + id + "clicked!");
 }
@@ -40,15 +42,19 @@ $.prettyMenu.init(
         width: 100
     }
 );
+
 ```
 
 **index.xml**
+
 ```xml
+
 <Alloy>
     <Window>
         <Widget src="ts.prettymenu" id="prettyMenu" />
     </Window>
 </Alloy>
+
 ```
 
 [![wearesmiths](http://wearesmiths.com/media/logoGitHub.png)](http://wearesmiths.com)
