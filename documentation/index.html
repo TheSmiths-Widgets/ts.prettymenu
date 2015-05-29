@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ts.prettymenu 1.0</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="fragment" content="!">
+
+  
+
+  <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+  <link rel="stylesheet" href="resources/css/app-b45e0623fa4eb1e1c70a70550106b25a.css" type="text/css" />
+  <link rel="stylesheet" href="styles-6a2c51222b129359149a5b48115b9f23.css" type="text/css" />
+
+  <script type="text/javascript" src="extjs/ext-all.js"></script>
+  <script type="text/javascript" src="data-03435a963d721c04fefb8b9660bf8188.js"></script>
+
+  <script type="text/javascript" src="app-31307dd847860d30cd701596bf1390da.js"></script>
+
+  
+
+</head>
+<body id="ext-body">
+
+  <div id="loading"><span class="title">ts.prettymenu 1.0</span><span class="logo"></span></div>
+
+  <div id="header-content">ts.prettymenu 1.0</div>
+  <div id='welcome-content' style='display:none'><div class="markdown"><p><a href="http://appcelerator.com/titanium/"><img src="http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png" alt="Appcelerator
+Titanium" /></a>
+<a href="http://appcelerator.com/alloy/"><img src="http://www-static.appcelerator.com/badges/alloy-git-badge-sq.png" alt="Appcelerator
+Alloy" /></a>
+<a href="http://choosealicense.com/licenses/apache-2.0/"><img src="http://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat" alt="License" /></a></p>
+
+<h2>Pretty Menu</h2>
+
+<p>This widget can be used to insert fancy menus in an app window. It's possible to define a menu as an
+icon and a title. All icons are provided by <a href="https://fontawesome.io/icons">FontAwesome</a> font; Refer
+to their documentation to find which icon is available.</p>
+
+<h2>How to install</h2>
+
+<ul>
+<li><code>gittio install ts.prettymenu</code> or simply <code>git clone https://thesmiths-widgets/ts.prettymenu</code></li>
+<li>Then, copy the content of the assets folder into yours to install fonts</li>
+</ul>
+
+
+<h2>Previews</h2>
+
+<p><a href="https://github.com/thesmiths-widgets/ts.prettymenu/blob/doc/images/screenshot.png">screenshot</a></p>
+
+<h2>How to use</h2>
+
+<p>Please, refer to the <a href="https://thesmiths-widgets.github.io/ts.prettymenu">documentation</a> for more
+details and options.</p>
+
+<p><strong>index.js</strong></p>
+
+<pre><code class="javascript">
+function handleClick (id) {
+    Ti.API.alert("Menu " + id + "clicked!");
+}
+
+$.prettyMenu.init(
+    [
+        { id: "menu:profile", icon: "fa-eye", title: "Mon profil", onClick: handleClick },
+        { id: "menu:question", icon: "fa-question", title: "Questions", onClick: handleClick },
+        { id: "menu:help", icon: "fa-help", title: "Aide", onClick: handleClick },
+        { id: "menu:logout", icon: "fa-flag-o", title: "Deconnexion", onClick: handleClick }
+    ], {
+        horizontalMargin: 10,
+        perRow: 2,
+        verticalMargin: 10,
+        width: 100
+    }
+);
+</code></pre>
+
+<p><strong>index.xml</strong></p>
+
+<pre><code class="xml">
+&lt;Alloy&gt;
+    &lt;Window&gt;
+        &lt;Widget src="ts.prettymenu" id="prettyMenu" /&gt;
+    &lt;/Window&gt;
+&lt;/Alloy&gt;
+</code></pre>
+
+<p><a href="http://wearesmiths.com"><img src="http://wearesmiths.com/media/logoGitHub.png" alt="wearesmiths" /></a></p>
+</div></div>
+            <div id='categories-content' style='display:none'>
+            <div class='section'>
+<h1>Others...</h1>
+<div class='left-column'>
+<h3>Others...</h3>
+<ul class='links'>
+<li><a href="#!/api/prettymenu" rel="prettymenu" class="docClass">prettymenu</a></li>
+</ul>
+</div>
+<div class='middle-column'>
+</div>
+<div class='right-column'>
+</div>
+<div style='clear:both'></div>
+</div>
+          </div>
+
+  
+  
+  <div id='footer-content' style='display: none'>TheSmiths - copyright  2015</div>
+
+  
+
+  <script type="text/javascript">
+  (function(){
+    var protocol = (document.location.protocol === "https:") ? "https:" : "http:";
+    document.write("<link href='"+protocol+"//fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css' />");
+  })();
+  </script>
+
+</body>
+</html>

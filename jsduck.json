@@ -1,5 +1,6 @@
 {
-    "--title": "ts.prettymenu 0.1",
+    "--title": "ts.prettymenu 1.0",
+    "--welcome": "./README.md",
     "--output": "./documentation",
     "--touch-examples": true,
     "--no-source": true,
