@@ -1,6 +1,7 @@
 /** @class prettymenu
- * This widget display pretty menus as a set of clickable cards. Each card contain a FontAwesome icon
- * and a title. Many parameters are customisable to make the menu look the way you want.
+ * This widget display pretty menus as a set of clickable cards. Each card contain a
+ * [FontAwesome](http://fontawesome.io/icons) icon and a title. Many parameters are customisable to
+ * make the menu look the way you want.
  *
  * The font currently in use has been placed in the `assets/fonts` folder and should be merged with
  * the current `assets` folder of your app.
@@ -8,14 +9,14 @@
  * @requires FontAwesome
  */ 
 
-/** @property {Object} icons The list of correspondances between icons names and their ascii code.*/
+/** @readonly @property {Object} icons The list of correspondances between icons names and their ascii code.*/
 $.icons = require(WPATH("fa-icons"));
 
 /** @readonly @property {String} DEFAULT_ID The default id used if no one is provided */
 $.DEFAULT_ID = "default";
 /** @readonly @property {String} DEFAULT_ICON The default icon used if no one is provided */
 $.DEFAULT_ICON = __p.file("fa-remove");
-/** @readonly @property {Function} DEFAULT_ID The default handler used if no one is provided */
+/** @readonly @property {Function} DEFAULT_HANDLER The default handler used if no one is provided */
 $.DEFAULT_HANDLER = function() {
     Ti.API.warn("Menu unitialized.");
 };
@@ -26,32 +27,32 @@ $.DEFAULT_HANDLER = function() {
  * menu item provided.
  * 
  * @param {Object[]} menus A list of menu item; Each item should have the following form:
- * @param {String} menus.id An id that will be communicated to the click handler
- * @param {String} menus.title The title to be displayed.
- * @param {String} menus.icon The icon to display; Use identifier from 
+ * @param {String} [menus.id] An id that will be communicated to the click handler
+ * @param {String} [menus.title] The title to be displayed.
+ * @param {String} [menus.icon] The icon to display; Use identifier from 
  * [FontAwesome](http://fontawesome.io/icons)
- * @param {Function} menus.onClick A click handler
+ * @param {Function} [menus.onClick] A click handler
  * @param {String} menus.onClick.id The corresponding menu item id.
  *
  * @param {String} config Well... the configuration of the widget. Have fun.
- * @param {String} config.foregroundColor The titles's and icon's color; Also, if no border's color
- * has been supplied, the border's color. 
  * @param {String} config.backgroundColor The color of everything that is not mentionned as a
  * foreground element. 
  * @param {String} config.border The item's border.
  * @param {String} config.border.color The border's color.
  * @param {String} config.border.radius The border's radius.
  * @param {String} config.border.width The border's width.
- * @param {String} config.noBorder If true, no border will be displayed.
- * @param {String} config.horizontalMargin The space between two items.
- * @param {String} config.verticalMargin The space between two rows of item.
- * @param {String} config.innerPadding The space between the icon and the title.
- * @param {String} config.outerPadding The space from top and bottom borders.
- * @param {String} config.perRow The number of item to put in one row.
  * @param {String} config.font The title's font
  * @param {String} config.font.fontFamily The font's family
  * @param {String} config.font.fontSize The font's size.
+ * @param {String} config.foregroundColor The titles's and icon's color; Also, if no border's color
+ * has been supplied, the border's color. 
  * @param {String} config.iconSize The icon's size
+ * @param {String} config.innerPadding The space between the icon and the title.
+ * @param {String} config.horizontalMargin The space between two items.
+ * @param {String} config.noBorder If true, no border will be displayed.
+ * @param {String} config.outerPadding The space from top and bottom borders.
+ * @param {String} config.perRow The number of item to put in one row.
+ * @param {String} config.verticalMargin The space between two rows of item.
  * @param {String} config.width The width of the item. Also, if no font.fontSize has been supplied,
  * will set the title's fontSize to one tenth of the width. If no iconSize has been supplied, will
  * set the icon's size to one third of the width.
