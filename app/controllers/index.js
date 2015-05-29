@@ -10,16 +10,16 @@ $.prettyMenu.init(
 
 $.prettyMenu2.init(
     [
-        { id: "menu", icon: "fa-question" }, 
-        { id: "menu", icon: "fa-futbol-o" }, 
-        { id: "menu", icon: "fa-gamepad" }, 
-        { id: "menu", icon: "fa-heart" }, 
-        { id: "menu", icon: "fa-cloud" },
-        { id: "menu", icon: "fa-train" }, 
-        { id: "menu", icon: "fa-bank" }, 
-        { id: "menu", icon: "fa-github" }, 
-        { id: "menu", icon: "fa-apple" }, 
-        { id: "menu", icon: "fa-dlfjgdlfkjg" }
+        { icon: "fa-question" }, 
+        { icon: "fa-futbol-o" }, 
+        { icon: "fa-gamepad" }, 
+        { icon: "fa-heart" }, 
+        { icon: "fa-cloud" },
+        { icon: "fa-train" }, 
+        { icon: "fa-bank" }, 
+        { icon: "fa-github" }, 
+        { icon: "fa-apple" }, 
+        { icon: "fa-dlfjgdlfkjg" }
     ], {
         backgroundColor: "#9ACD32",
         foregroundColor: "#FFFFFF",
@@ -32,6 +32,33 @@ $.prettyMenu2.init(
         width: 50
     }
 );
+
+$.prettyMenu3.init(
+    [
+        { icon: "fa-arrow-up" }, 
+        { icon: "fa-arrow-up" }, 
+        { icon: "fa-arrow-down" }, 
+        { icon: "fa-arrow-down" }, 
+        { icon: "fa-arrow-left" }, 
+        { icon: "fa-arrow-right" },
+        { icon: "fa-arrow-left" }, 
+        { icon: "fa-arrow-right" },
+        { icon: "fa-bold" }, 
+        { icon: "fa-font" }
+    ], {
+        backgroundColor: "#999999",
+        border: { radius: 12 },
+        foregroundColor: "#FFFFFF",
+        perRow: 10,
+        horizontalMargin: 0,
+        verticalMargin: 50,
+        innerPadding: 0,
+        outerPadding: 4,
+        iconSize: 15,
+        width: 26
+    }
+);
+
 
 function handleClick(clickEvent) {
     Ti.API.warn(clickEvent);

@@ -3,6 +3,7 @@
         <View class="container">
             <Widget src="ts.prettymenu" id="prettyMenu" />
             <Widget src="ts.prettymenu" id="prettyMenu2" />
+            <Widget src="ts.prettymenu" id="prettyMenu3" />
         </View>
 	</Window>
 </Alloy>
