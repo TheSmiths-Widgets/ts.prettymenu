@@ -32,7 +32,7 @@ module.exports = function (gulp, plugins) {
             var clearAndDone = function () {
                 plugins.utils.clean_env();
                 done();
-            });
+            };
 
             if (screenshots.length === 0) {
                 clearAndDone(); 
