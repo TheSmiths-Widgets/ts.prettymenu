@@ -1,7 +1,7 @@
 module.exports = function (gulp, plugins) {
     gulp.task('test:jasmine', ['build:appify'], function (done) {
         plugins.utils.env.jasmine = done;
-        plugins.exec('tishadow spec').stdout.pipe(process.stdout);
+        plugins.exec('tishadow spec -P ' + process.env.PLATFORM).stdout.pipe(process.stdout);
     });
 
 
