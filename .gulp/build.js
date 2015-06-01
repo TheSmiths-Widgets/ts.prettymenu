@@ -8,7 +8,7 @@ module.exports = function (gulp, plugins) {
             /* Watch for the server starts */
             var ip = data.match(/\[DEBUG\] connect to ((\d+\.?){4}):\d+/);
             if (ip !== null) {
-                plugins.exec('ti build -C geny --appify -p ' + process.env.PLATFORM + ' --log-level warn -o ' + ip[1]).stdout.pipe(process.stdout);
+                plugins.exec('ti build --appify -p ' + process.env.PLATFORM + ' --log-level warn -o ' + ip[1]).stdout.pipe(process.stdout);
             }
 
             /* Watch for the simulator to be ready */
