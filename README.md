@@ -3,6 +3,7 @@ Titanium](http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png)](
 [![Appcelerator
 Alloy](http://www-static.appcelerator.com/badges/alloy-git-badge-sq.png)](http://appcelerator.com/alloy/)
 [![License](http://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](http://choosealicense.com/licenses/apache-2.0/)
+[![Travis](https://api.travis-ci.org/TheSmiths-Widgets/ts.prettymenu.svg)](https://travis-ci.org/TheSmiths-Widgets/ts.prettymenu/)
 
 ## Pretty Menu
 This widget can be used to insert fancy menus in an app window. It's possible to define a menu as an
