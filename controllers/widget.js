@@ -10,7 +10,7 @@
  */ 
 
 /** @readonly @property {Object} icons The list of correspondances between icons names and their ascii code.*/
-$.icons = require(WPATH("fa-icons"));
+$.icons = require(WPATH("icons-fa"));
 
 /** @readonly @property {String} [DEFAULT_ID="default"] The default id used if no one is provided */
 $.DEFAULT_ID = "default";
