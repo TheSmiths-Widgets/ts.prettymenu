@@ -5,27 +5,26 @@ module.exports = function (gulp, plugins) {
 
         /* Start TiShadow Server */
         plugins.exec('tishadow server').stdout.on('data', function (data) {
-            if (data.match(/\[INFO\]/) === null) process.stdout.write(data);
-
             /* Watch for the server starts */
             var ip = data.match(/\[DEBUG\] connect to ((\d+\.?){4}):\d+/);
             if (ip !== null) {
-                plugins.exec('ti build --appify -p ' + process.env.PLATFORM + ' --log-level warn -o ' + ip[1]);
+                plugins.exec('ti build -C geny --appify -p ' + process.env.PLATFORM + ' --log-level warn -o ' + ip[1]).stdout.pipe(process.stdout);
             }
 
             /* Watch for the simulator to be ready */
             if (data.match(/\[INFO\] \[\S+, \S+, \S+\] \S+ launched\./) !== null) {
                 done();
+                done = function () { };
             }
 
             /* Watch for fail tests */
-            failure = failure || (data.match(/\[FAIL\] \[\S+, \S+, \S+\].+ spec\(s\) failed\./) !== null);
+            failure = failure || (data.match(/FAIL[\s\S]+failed/) !== null);
 
             /* Watch for jasmine to end */
             if (data.match(/\[TEST\] \[\S+, \S+, \S+\] Runner Finished/) !== null) {
-                if (failure) return plugins.utils.abort('Jasmine tests failed', plugins.utils.env.jasmine);
+                if (failure) { return plugins.utils.abort('Jasmine tests failed'); }
                 plugins.utils.env.jasmine();
-    	          plugins.utils.clean_env();
+    	        plugins.utils.clean_env();
             }
         });
     });
