@@ -35,28 +35,33 @@ $.DEFAULT_HANDLER = function() {
  * @param {Function} [menus.onClick] A click handler
  * @param {String} menus.onClick.id The corresponding menu item id.
  *
- * @param {String} config Well... the configuration of the widget. Have fun.
- * @param {String} config.backgroundColor The color of everything that is not mentionned as a
- * foreground element. 
- * @param {String} config.border The item's border.
- * @param {String} config.border.color The border's color.
- * @param {String} config.border.radius The border's radius.
- * @param {String} config.border.width The border's width.
- * @param {String} config.font The title's font
- * @param {String} config.font.fontFamily The font's family
- * @param {String} config.font.fontSize The font's size.
- * @param {String} config.foregroundColor The titles's and icon's color; Also, if no border's color
- * has been supplied, the border's color. 
- * @param {String} config.iconSize The icon's size
- * @param {String} config.innerPadding The space between the icon and the title.
- * @param {String} config.horizontalMargin The space between two items.
- * @param {String} config.noBorder If true, no border will be displayed.
- * @param {String} config.outerPadding The space from top and bottom borders.
- * @param {String} config.perRow The number of item to put in one row.
- * @param {String} config.verticalMargin The space between two rows of item.
- * @param {String} config.width The width of the item. Also, if no font.fontSize has been supplied,
- * will set the title's fontSize to one tenth of the width. If no iconSize has been supplied, will
- * set the icon's size to one third of the width.
+ * @param {Object} config Well... the configuration of the widget. Have fun.
+ * @param {String} [config.alignment = "center"] The alignment of the item content; Only available
+ * when the layout is set to "horizontal". Available options are "left", "right" and "center".
+ * @param {String} [config.backgroundColor="#FFFFFF"] The color of everything
+ * that is not mentionned as a foreground element.  
+ * @param {Object} [config.border] The item's border.
+ * @param {String} [config.border.color = config.border.foregroundColor] The border's color.
+ * @param {Number} [config.border.radius = 0] The border's radius.
+ * @param {Number} [config.border.width = 1] The border's width.
+ * @param {Object} [config.font] The title's font
+ * @param {String} [config.font.fontFamily = "Helveticae Neue"] The font's family
+ * @param {Number} [config.font.fontSize = 12] The font's size.
+ * @param {String} [config.foregroundColor = "#000000"] The titles's and icon's color; Also, if no
+ * border's color has been supplied, the border's color. 
+ * @param {String} [config.iconSize = 40] The icon's size
+ * @param {String} [config.layout = "vertical"] The orientation of the item, "horizontal" or "vertical".
+ * @param {Object} [config.margins] Margins around the item
+ * @param {Number} [config.margins.horizontal = 0] The space between two items.
+ * @param {String} [config.margins.vertical = 0] The space between two rows of item.
+ * @param {Object} [config.paddings] Different paddings that could be set on the item
+ * @param {Number} [config.paddings.inner = 0] The space between the icon and the title.
+ * @param {Number} [config.paddings.vertical = 0] The space from top and bottom borders.
+ * @param {Number} [config.paddings.horizontal = 0] The space from left and right borders. 
+ * @param {Number} [config.perRow = 1] The number of item to put in one row.
+ * @param {Number} [config.width = Ti.UI.SIZE] The width of the item. Also, if no font.fontSize has
+ * been supplied, will set the title's fontSize to one tenth of the width. If no iconSize has been
+ * supplied, will set the icon's size to one third of the width.
  */ 
 function init(menus, config) {
     var row = [];
