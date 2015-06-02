@@ -12,21 +12,33 @@ function retrieveItem(widget, row, item) {
     return retrieveRows(widget, row).getChildren()[item];
 }
 
-function retrieveTitle(item, fullItem) {
-    if (fullItem) {
-        return item.getChildren()[2];
-    }
-    return item.getChildren()[2].text;
+function retrieveTitle(item) {
+    return retrieveContainer(item).getChildren()[1];
 }
 
-function retrieveIcon(widget, item, fullItem) {
-    if (fullItem) {
-        return item.getChildren()[1];
-    }
-    var iconCode = item.getChildren()[1].text.charCodeAt(0);
+function retrieveIcon(item) {
+    return retrieveContainer(item).getChildren()[0];
+}
+
+function retrieveContainer(item) {
+    return item.getChildren()[0];
+}
+
+function retrieveIconCode(widget, item) {
+    var iconCode = retrieveIcon(item).text.charCodeAt(0);
     return _.find(_.pairs(widget.icons), function(pair) {
         return pair[1] === iconCode;
     })[0];
+}
+
+function trueSize(dim) {
+    var density = Ti.Platform.displayCaps.logicalDensityFactor;
+
+    if ( Ti.Platform.name === "android") {
+        return dim / density;
+    } else {
+        return dim;
+    }
 }
 
 describe("The pretty menu should be pretty-initialized", function() {
@@ -138,7 +150,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             expect(widget.getView()).not.toBeNull();
             expect(retrieveRows(widget)).toContain(jasmine.any(Object));
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveTitle(firstItem)).toEqual(prettyMenus.classic[0].title);
+            expect(retrieveTitle(firstItem).text).toEqual(prettyMenus.classic[0].title);
             runs(function() {
                 firstItem.fireEvent("click");
             });
@@ -157,8 +169,8 @@ describe("The pretty menu should be pretty-initialized", function() {
             expect(widget.getView()).not.toBeNull();
             expect(retrieveRows(widget)).toContain(jasmine.any(Object));
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveTitle(firstItem)).toBeFalsy();
-            expect(retrieveTitle(firstItem, true).height).toEqual(0);
+            expect(retrieveTitle(firstItem).text).toBeFalsy();
+            expect(retrieveTitle(firstItem).height).toEqual(0);
         });
         it("can be initialized without item's icon", function() {
             expect(function() {
@@ -167,7 +179,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             expect(widget.getView()).not.toBeNull();
             expect(retrieveRows(widget)).toContain(jasmine.any(Object));
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveIcon(widget, firstItem)).toEqual(widget.DEFAULT_ICON);
+            expect(retrieveIconCode(widget, firstItem)).toEqual(widget.DEFAULT_ICON);
         });
         it("can be initialized without item's handler", function() {
             expect(function() {
@@ -224,40 +236,57 @@ describe("The pretty menu should be pretty-initialized", function() {
             expect(retrieveRows(widget, 0).getChildren().length).toEqual(perRow);
             expect(retrieveRows(widget, 1).getChildren().length).toEqual(1);
         });
-        it("can handle an outer padding", function() {
+        it("can handle a vertical padding", function() {
             var config = {
-                outerPadding: 14
+                paddings: { vertical: 14 },
+                width: 140
             };
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveTitle(firstItem, true).bottom).toEqual(config.outerPadding);
-            expect(retrieveIcon(widget, firstItem, true).top).toEqual(config.outerPadding);
+            expect(retrieveTitle(firstItem).bottom).toEqual(config.paddings.vertical);
+            expect(retrieveIcon(firstItem).top).toEqual(config.paddings.vertical);
+
+
+            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+        });
+        it("can handle an horizontal padding", function() {
+            var config = {
+                paddings: { horizontal: 14 },
+                width: 140
+            };
+            widget.init(prettyMenus.classic, config);
+            var firstItem = retrieveItem(widget, 0, 0);
+            expect(retrieveTitle(firstItem).right).toEqual(config.paddings.horizontal);
+            expect(retrieveTitle(firstItem).left).toEqual(config.paddings.horizontal);
+            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
         });
         it("can handle an inner padding", function() {
             var config = {
-                innerPadding: 14
+                paddings: { inner: 14 },
+                width: 140
             };
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveTitle(firstItem, true).top).toEqual(config.innerPadding);
+            expect(retrieveTitle(firstItem).top).toEqual(config.paddings.inner);
+            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
         });
         it("can handle a vertical margin", function() {
             var config = {
-                verticalMargin: 14
+                margins: { vertical: 14 }
             };
             widget.init(prettyMenus.classic, config);
             var firstRow = retrieveRows(widget, 0);
-            expect(firstRow.top).toEqual(config.verticalMargin / 2);
-            expect(firstRow.bottom).toEqual(config.verticalMargin / 2);
+            expect(firstRow.top).toEqual(config.margins.vertical / 2);
+            expect(firstRow.bottom).toEqual(config.margins.vertical / 2);
         });
         it("can handle an horizontal margin", function() {
             var config = {
-                horizontalMargin: 14
+                margins: { horizontal: 14 }
             };
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(firstItem.left).toEqual(config.horizontalMargin / 2);
-            expect(firstItem.right).toEqual(config.horizontalMargin / 2);
+            expect(firstItem.left).toEqual(config.margins.horizontal / 2);
+            expect(firstItem.right).toEqual(config.margins.horizontal / 2);
         });
         it("can handle a font", function() {
             var config = {
@@ -268,7 +297,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             };
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveTitle(firstItem, true).font).toEqual(config.font);
+            expect(retrieveTitle(firstItem).font).toEqual(config.font);
         });
         it("can handle an icon size", function() {
             var config = {
@@ -276,7 +305,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             };
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveIcon(widget, firstItem, true).font.fontSize).toEqual(config.iconSize);
+            expect(retrieveIcon(firstItem).font.fontSize).toEqual(config.iconSize);
         });
         it("can handle a width", function() {
             var config = {
@@ -284,14 +313,18 @@ describe("The pretty menu should be pretty-initialized", function() {
             };
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(firstItem.toImage().width).toEqual(config.width);
-            expect(retrieveTitle(firstItem, true).font.fontSize).toEqual(config.width / 10);
-            expect(retrieveIcon(widget, firstItem, true).font.fontSize).toEqual(config.width / 3);
+
+            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(retrieveTitle(firstItem).font.fontSize).toEqual(config.width / 10);
+            expect(retrieveIcon(firstItem).font.fontSize).toEqual(config.width / 3);
+
             widget = Alloy.createWidget("ts.prettymenu");
             config.width = 14;
             widget.init(prettyMenus.longTitle, config);
             firstItem = retrieveItem(widget, 0, 0);
-            expect(firstItem.toImage().width).toBeGreaterThan(config.width);
+
+            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+
             config = {
                 width: 140,
                 font: {
@@ -301,18 +334,12 @@ describe("The pretty menu should be pretty-initialized", function() {
             widget = Alloy.createWidget("ts.prettymenu");
             widget.init(prettyMenus.classic, config);
             firstItem = retrieveItem(widget, 0, 0);
-            expect(firstItem.toImage().width).toEqual(config.width);
-            expect(retrieveTitle(firstItem, true).font.fontSize).toEqual(config.font.fontSize);
+
+            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(retrieveTitle(firstItem).font.fontSize).toEqual(config.font.fontSize);
         });
         it("can handle a border", function() {
             var config = {
-                noBorder: true
-            };
-            widget.init(prettyMenus.classic, config);
-            var firstItem = retrieveItem(widget, 0, 0);
-            expect(firstItem.borderWidth).toEqual(0);
-            widget = Alloy.createWidget("ts.prettymenu");
-            config = {
                 border: {
                     width: 14,
                     color: "green",
@@ -320,7 +347,7 @@ describe("The pretty menu should be pretty-initialized", function() {
                 }
             };
             widget.init(prettyMenus.classic, config);
-            firstItem = retrieveItem(widget, 0, 0);
+            var firstItem = retrieveItem(widget, 0, 0);
             expect(firstItem.borderColor).toEqual(config.border.color);
             expect(firstItem.borderWidth).toEqual(config.border.width);
             expect(firstItem.borderRadius).toEqual(config.border.radius);
@@ -331,8 +358,8 @@ describe("The pretty menu should be pretty-initialized", function() {
             };
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveTitle(firstItem, true).color).toEqual(config.foregroundColor);
-            expect(retrieveIcon(widget, firstItem, true).color).toEqual(config.foregroundColor);
+            expect(retrieveTitle(firstItem).color).toEqual(config.foregroundColor);
+            expect(retrieveIcon(firstItem).color).toEqual(config.foregroundColor);
             expect(firstItem.borderColor).toEqual(config.foregroundColor);
         });
         it("can handle a background color", function() {
@@ -341,11 +368,83 @@ describe("The pretty menu should be pretty-initialized", function() {
             };
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
-            expect(retrieveTitle(firstItem, true).backgroundColor).toEqual(config.backgroundColor);
-            expect(retrieveIcon(widget, firstItem, true).backgroundColor).toEqual(config.backgroundColor);
+            expect(retrieveTitle(firstItem).backgroundColor).toEqual(config.backgroundColor);
+            expect(retrieveIcon(firstItem).backgroundColor).toEqual(config.backgroundColor);
             expect(firstItem.backgroundColor).toEqual(config.backgroundColor);
         });
+        it("can handle a layout orientation", function() {
+            var config = {
+                layout: "horizontal",
+                paddings: {
+                    inner: 14,
+                    vertical: 140,
+                    horizontal: 42
+                },
+                width: 140
+            };
+
+            widget.init(prettyMenus.classic, config);
+
+            var firstItem = retrieveItem(widget, 0, 0);
+            expect(retrieveTitle(firstItem).right).toEqual(config.paddings.horizontal);
+            expect(retrieveIcon(firstItem).left).toEqual(config.paddings.horizontal);
+            expect(retrieveIcon(firstItem).right).toEqual(config.paddings.inner);
+            expect(retrieveTitle(firstItem).top).toEqual(config.paddings.vertical);
+            expect(retrieveTitle(firstItem).bottom).toEqual(config.paddings.vertical);
+            expect(retrieveIcon(firstItem).top).toEqual(config.paddings.vertical);
+            expect(retrieveIcon(firstItem).bottom).toEqual(config.paddings.vertical);
+            
+            var density = Titanium.Platform.displayCaps.logicalDensityFactor;
+                iconHeight = retrieveIcon(firstItem).toImage().height,
+                titleHeight = retrieveIcon(firstItem).toImage().height;
+
+            if (Titanium.Platform.name === "android") {
+                iconHeight /= density;
+                titleHeight /= density;
+            }
+
+            expect(iconHeight).toEqual(titleHeight);
+            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+        });
+        
+
     });
+
+    describe("The menu also comes with special default behavior", function () {
+        it("Resize the icon and the title when only a width is supplied", function () {
+            var config = {
+                width: 140
+            };
+
+            widget.init(prettyMenus.classic, config);
+            var firstItem = retrieveItem(widget, 0, 0),
+                density = Ti.Platform.displayCaps.logicalDensityFactor;
+
+            expect(retrieveTitle(firstItem).font.fontSize).toEqual(config.width / 10);
+            expect(retrieveIcon(firstItem).font.fontSize).toEqual(config.width / 3);
+
+            config = {
+                width: 140,
+                font: {
+                    fontSize: 10
+                }
+            };
+
+            widget = Alloy.createWidget("ts.prettymenu");
+            widget.init(prettyMenus.classic, config);
+            firstItem = retrieveItem(widget, 0, 0);
+
+            if (Ti.Platform.name === "android") {
+                expect(firstItem.toImage().width / density).toEqual(config.width);
+            } else {
+                expect(firstItem.toImage().width).toEqual(config.width);
+            }
+
+            expect(retrieveTitle(firstItem).font.fontSize).toEqual(config.font.fontSize);
+
+        });
+    });
+
     describe("Each item is quite fancy when you tap on it", function() {
         it("should toggle colors on while beeing pressed", function() {
             var config = {
@@ -363,11 +462,11 @@ describe("The pretty menu should be pretty-initialized", function() {
             }, "colors to change", delay * 2);
             runs(function() {
                 expect(firstItem.backgroundColor).toEqual(config.foregroundColor);
-                expect(retrieveTitle(firstItem, true).backgroundColor).toEqual(config.foregroundColor);
-                expect(retrieveIcon(widget, firstItem, true).backgroundColor).toEqual(config.foregroundColor);
+                expect(retrieveTitle(firstItem).backgroundColor).toEqual(config.foregroundColor);
+                expect(retrieveIcon(firstItem).backgroundColor).toEqual(config.foregroundColor);
                 expect(firstItem.borderColor).toEqual(config.backgroundColor);
-                expect(retrieveTitle(firstItem, true).color).toEqual(config.backgroundColor);
-                expect(retrieveIcon(widget, firstItem, true).color).toEqual(config.backgroundColor);
+                expect(retrieveTitle(firstItem).color).toEqual(config.backgroundColor);
+                expect(retrieveIcon(firstItem).color).toEqual(config.backgroundColor);
             });
         });
         it("should recover initial colors once the item has been press", function() {
@@ -390,11 +489,11 @@ describe("The pretty menu should be pretty-initialized", function() {
             }, "colors to change", delay * 3);
             runs(function() {
                 expect(firstItem.backgroundColor).toEqual(config.backgroundColor);
-                expect(retrieveTitle(firstItem, true).backgroundColor).toEqual(config.backgroundColor);
-                expect(retrieveIcon(widget, firstItem, true).backgroundColor).toEqual(config.backgroundColor);
+                expect(retrieveTitle(firstItem).backgroundColor).toEqual(config.backgroundColor);
+                expect(retrieveIcon(firstItem).backgroundColor).toEqual(config.backgroundColor);
                 expect(firstItem.borderColor).toEqual(config.foregroundColor);
-                expect(retrieveTitle(firstItem, true).color).toEqual(config.foregroundColor);
-                expect(retrieveIcon(widget, firstItem, true).color).toEqual(config.foregroundColor);
+                expect(retrieveTitle(firstItem).color).toEqual(config.foregroundColor);
+                expect(retrieveIcon(firstItem).color).toEqual(config.foregroundColor);
             });
         });
     });
