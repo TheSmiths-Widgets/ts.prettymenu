@@ -23,11 +23,11 @@ $.borderColorConfigured = false;
     /* Space between title and bottom; and icon and top*/
     if (config.paddings !== undefined) {
         if (config.paddings.vertical !== undefined) {
-            $.prettyContainer.top = $.prettyContainer.bottom = config.paddings.vertical;
+            $.prettyIcon.top = $.prettyTitle.bottom = config.paddings.vertical;
         }
 
         if (config.paddings.horizontal !== undefined) {
-            $.prettyContainer.left = $.prettyContainer.right = config.paddings.horizontal;
+            $.prettyTitle.left = $.prettyTitle.right = config.paddings.horizontal;
         }
 
         /* Space between title and icon */
@@ -57,7 +57,7 @@ $.borderColorConfigured = false;
     }
 
     if (config.width !== undefined) {
-        $.prettyScaler.width = config.width;
+        $.prettyItem.width = config.width;
 
         if (!$.fontSizeConfigured) {
             $.prettyTitle.font = {
@@ -77,8 +77,12 @@ $.borderColorConfigured = false;
     if (config.border !== undefined) {
         $.borderColorConfigured = config.border.color;
         $.prettyItem.borderColor = config.border.color || $.prettyItem.borderColor;
-        $.prettyItem.borderWidth = config.border.width || $.prettyItem.borderWidth;
-        $.prettyItem.borderRadius = config.border.radius || $.prettyItem.borderRadius;
+        $.prettyItem.borderWidth = config.border.width !== undefined ? 
+            config.border.width :
+            $.prettyItem.borderWidth;
+        $.prettyItem.borderRadius = config.border.radius !== undefined ?
+            config.border.radius : 
+            $.prettyItem.borderRadius;
     }
 
     if (config.foregroundColor !== undefined) {
@@ -97,6 +101,8 @@ $.borderColorConfigured = false;
         $.prettyContainer.layout = "horizontal"; 
 
         var innerPadding = $.prettyTitle.top,
+            verticalPadding = $.prettyIcon.top,
+            horizontalPadding = $.prettyTitle.left,
             d = Ti.Platform.displayCaps.logicalDensityFactor, 
             iconHeight = $.prettyIcon.toImage().height / (OS_ANDROID ? d : 1);
             titleHeight= $.prettyTitle.toImage().height / (OS_ANDROID ? d : 1);
@@ -104,15 +110,19 @@ $.borderColorConfigured = false;
         if (iconHeight > titleHeight) {
             $.prettyTitle.height = iconHeight;
         } else {
-            $.prettyIcon.height = titleHeight;
+           $.prettyIcon.height = titleHeight;
         }
 
-        $.prettyIcon.top = $.prettyTitle.top = 0;
+        $.prettyIcon.top = $.prettyIcon.bottom = verticalPadding;
+        $.prettyTitle.top = $.prettyTitle.bottom = verticalPadding;
         $.prettyIcon.right = innerPadding;
+        $.prettyIcon.left = horizontalPadding;
+        $.prettyTitle.left = 0;
 
-        if (config.alignment !== undefined) {
-            if (config.alignment === "left") { $.prettyContainer.left = 0; }
-            else if (config.alignment === "right") { $.prettyContainer.right = 0; }
+
+        if (config.alignment !== undefined && config.alignment.inner !== undefined) {
+            if (config.alignment.inner === "left") { $.prettyContainer.left =  0; }
+            else if (config.alignment.inner === "right") { $.prettyContainer.right =  0; }
         }
     }
 
