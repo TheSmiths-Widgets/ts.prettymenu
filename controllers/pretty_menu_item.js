@@ -28,10 +28,13 @@ $.borderColorConfigured = false;
 
         if (config.paddings.horizontal !== undefined) {
             $.prettyTitle.left = $.prettyTitle.right = config.paddings.horizontal;
+            if (args.title === undefined) {
+                $.prettyIcon.left = $.prettyIcon.right = config.paddings.horizontal;
+            }
         }
 
         /* Space between title and icon */
-        if (config.paddings.inner !== undefined) {
+        if (config.paddings.inner !== undefined && args.title !== undefined) {
             $.prettyTitle.top = config.paddings.inner;
         }
     }
@@ -97,7 +100,7 @@ $.borderColorConfigured = false;
         $.prettyIcon.backgroundColor = $.prettyTitle.backgroundColor = $.prettyItem.backgroundColor = config.backgroundColor;
     }
 
-    if (config.layout !== undefined && config.layout === "horizontal") {
+    if (config.layout === "horizontal" && args.title !== undefined) {
         $.prettyContainer.layout = "horizontal"; 
 
         var innerPadding = $.prettyTitle.top,
@@ -128,6 +131,7 @@ $.borderColorConfigured = false;
 
     if (args.title === undefined) {
         $.prettyTitle.height = 0;
+        $.prettyTitle.width = Ti.UI.FILL;
     }
 })(arguments[0] || {});
 
