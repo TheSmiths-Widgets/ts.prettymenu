@@ -62,7 +62,7 @@ function init(menus, config) {
     var row = [];
     menus = menus || [];
     config = config || {};
-    config.perRow = config.perRow || 2;
+    config.perRow = config.perRow || 1;
 
     /* Iterate over every menus if any to add them to the global container */
     _.each(menus, function(menuItemParams) {
@@ -104,6 +104,16 @@ function init(menus, config) {
         /* Apply the configuration */
         if (config.margins !== undefined && config.margins.vertical !== undefined) {
             rowView.top = rowView.bottom = config.margins.vertical / 2;
+        }
+
+        if (config.alignment !== undefined && config.alignment.outer !== undefined) {
+            if (config.alignment.outer === "left") {
+                rowView.center = null;
+                rowView.left = 0;
+            } else if (config.alignment.outer === "right") {
+                rowView.center = null;
+                rowView.right = 0;
+            }
         }
 
         _.each(row, function(menu_item) {
