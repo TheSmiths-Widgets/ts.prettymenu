@@ -4,7 +4,20 @@ $.prettyMenu.init(
         { id: "question", icon: "fa-question", title: "Gestelde vragen", onClick: handleClick },
         { id: "help", icon: "fa-info", title: "Help", onClick: handleClick },
         { id: "dunno", icon: "fa-flag-o", title: "UitLoggen", onClick: handleClick  }
-    ], { width: 100 }
+    ], { 
+        foregroundColor: "#1DB7FF",
+        paddings: {
+            inner: 25,
+            vertical: 10
+        },
+        iconSize: 40,
+        margins: {
+            vertical: 5,
+            horizontal: 5
+        },
+        perRow: 2,
+        width: 80
+    }
 );
 
 
@@ -24,10 +37,7 @@ $.prettyMenu2.init(
         backgroundColor: "#9ACD32",
         foregroundColor: "#FFFFFF",
         perRow: 5,
-        horizontalMargin: 0,
-        verticalMargin: 0,
-        innerPadding: 0,
-        outerPadding: 12.5,
+        paddings: { vertical: 12.5 },
         iconSize: 25,
         width: 50
     }
@@ -50,12 +60,10 @@ $.prettyMenu3.init(
         border: { radius: 12 },
         foregroundColor: "#FFFFFF",
         perRow: 10,
-        horizontalMargin: 0,
-        verticalMargin: 50,
-        innerPadding: 0,
-        outerPadding: 4,
+        margins: { vertical: 50 },
+        paddings: { vertical: 4 },
         iconSize: 15,
-        width: 26
+        width: 25
     }
 );
 
