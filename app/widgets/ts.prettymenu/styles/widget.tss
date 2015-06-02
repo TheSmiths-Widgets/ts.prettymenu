@@ -2,7 +2,7 @@
 ".pretty-menu": {
     layout:     "vertical",
     height:     Ti.UI.SIZE,
-    width:      Ti.UI.FILL
+    width:      Ti.UI.SIZE
 }
 
 /* ------ Ti.UI.View ------ */
