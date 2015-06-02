@@ -102,8 +102,8 @@ function init(menus, config) {
         }));
 
         /* Apply the configuration */
-        if (config.verticalMargin !== undefined) {
-            rowView.top = rowView.bottom = config.verticalMargin / 2;
+        if (config.margins !== undefined && config.margins.vertical !== undefined) {
+            rowView.top = rowView.bottom = config.margins.vertical / 2;
         }
 
         _.each(row, function(menu_item) {

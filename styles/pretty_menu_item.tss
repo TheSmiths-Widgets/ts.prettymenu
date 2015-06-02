@@ -1,6 +1,6 @@
 /* ------ Ti.UI.View ------ */
 ".pretty-item": {
-    backgroundColor:    "#FFFFFF",
+    backgroundColor:    "#CCCCCC",
     borderColor:        "#1DB7FF",
     borderRadius:       "0",
     borderWidth:        "1",
@@ -11,20 +11,28 @@
     width:              Ti.UI.SIZE
 }
 
-/* ------ Ti.UI.Label ------ */
-".pretty-icon": {
-    backgroundColor:    "#FFFFFF",
-    color:              "#1DB7FF",
-    font:               { fontFamily: "FontAwesome" },
+/* ------ Ti.UI.View ------ */
+".pretty-container": {
+    backgroundColor:    "#161616",
+    bottom:             "5",
+    layout:             "vertical",
     height:             Ti.UI.SIZE,
     top:                "5",
     width:              Ti.UI.SIZE
 }
 
 /* ------ Ti.UI.Label ------ */
+".pretty-icon": {
+    backgroundColor:    "#1DB7FF",
+    color:              "#1DB7FF",
+    font:               { fontFamily: "FontAwesome" },
+    height:             Ti.UI.SIZE,
+    width:              Ti.UI.SIZE
+}
+
+/* ------ Ti.UI.Label ------ */
 ".pretty-title": {
-    backgroundColor:    "#FFFFFF",
-    bottom:             "5",
+    backgroundColor:    "#E52D27",
     color:              "#1DB7FF",
     font:               { fontFamily: "Helvetica Neue" },
     height:             Ti.UI.SIZE,
