@@ -21,18 +21,26 @@ $.borderColorConfigured = false;
     var config = args.config;
 
     /* Space between title and bottom; and icon and top*/
-    if (config.outerPadding !== undefined) {
-        $.prettyIcon.top = $.prettyTitle.bottom = config.outerPadding;
-    }
+    if (config.paddings !== undefined) {
+        if (config.paddings.vertical !== undefined) {
+            $.prettyContainer.top = $.prettyContainer.bottom = config.paddings.vertical;
+        }
 
-    /* Space between title and icon */
-    if (config.innerPadding !== undefined) {
-        $.prettyTitle.top = config.innerPadding;
+        if (config.paddings.horizontal !== undefined) {
+            $.prettyContainer.left = $.prettyContainer.right = config.paddings.horizontal;
+        }
+
+        /* Space between title and icon */
+        if (config.paddings.inner !== undefined) {
+            $.prettyTitle.top = config.paddings.inner;
+        }
     }
 
     /* Space between two items */
-    if (config.horizontalMargin !== undefined) {
-        $.prettyItem.left = $.prettyItem.right = config.horizontalMargin / 2;
+    if (config.margins !== undefined) {
+        if (config.margins.horizontal !== undefined) {
+            $.prettyItem.left = $.prettyItem.right = config.margins.horizontal / 2;
+        }
     }
 
     if (config.font !== undefined) {
@@ -66,10 +74,6 @@ $.borderColorConfigured = false;
         }
     }
 
-    if (config.noBorder) {
-        $.prettyItem.borderWidth = 0;
-    }
-
     if (config.border !== undefined) {
         $.borderColorConfigured = config.border.color;
         $.prettyItem.borderColor = config.border.color || $.prettyItem.borderColor;
@@ -87,6 +91,29 @@ $.borderColorConfigured = false;
     
     if (config.backgroundColor !== undefined) {
         $.prettyIcon.backgroundColor = $.prettyTitle.backgroundColor = $.prettyItem.backgroundColor = config.backgroundColor;
+    }
+
+    if (config.layout !== undefined && config.layout === "horizontal") {
+        $.prettyContainer.layout = "horizontal"; 
+
+        var innerPadding = $.prettyTitle.top,
+            d = Ti.Platform.displayCaps.logicalDensityFactor, 
+            iconHeight = $.prettyIcon.toImage().height / (OS_ANDROID ? d : 1);
+            titleHeight= $.prettyTitle.toImage().height / (OS_ANDROID ? d : 1);
+
+        if (iconHeight > titleHeight) {
+            $.prettyTitle.height = iconHeight;
+        } else {
+            $.prettyIcon.height = titleHeight;
+        }
+
+        $.prettyIcon.top = $.prettyTitle.top = 0;
+        $.prettyIcon.right = innerPadding;
+
+        if (config.alignment !== undefined) {
+            if (config.alignment === "left") { $.prettyContainer.left = 0; }
+            else if (config.alignment === "right") { $.prettyContainer.right = 0; }
+        }
     }
 
     if (args.title === undefined) {
