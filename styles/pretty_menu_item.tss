@@ -4,37 +4,44 @@
     borderColor:        "#1DB7FF",
     borderRadius:       "0",
     borderWidth:        "1",
+    bottom:             "0",
     height:             Ti.UI.SIZE,
     layout:             "vertical",
-    left:               "5",
-    right:              "5",
+    left:               "0",
+    right:              "0",
+    top:                "0",
+    width:              Ti.UI.SIZE
+}
+
+/* ------ Ti.UI.View ------ */
+".pretty-container": {
+    bottom:             "0",
+    height:             Ti.UI.SIZE,
+    layout:             "vertical",
+    top:                "0",
     width:              Ti.UI.SIZE
 }
 
 /* ------ Ti.UI.Label ------ */
 ".pretty-icon": {
     backgroundColor:    "#FFFFFF",
-    color:              "#1DB7FF",
+    bottom:             "0",
+    color:              "#000000",
     font:               { fontFamily: "FontAwesome" },
     height:             Ti.UI.SIZE,
-    top:                "5",
+    top:                "0",
     width:              Ti.UI.SIZE
 }
 
 /* ------ Ti.UI.Label ------ */
 ".pretty-title": {
     backgroundColor:    "#FFFFFF",
-    bottom:             "5",
-    color:              "#1DB7FF",
+    color:              "#000000",
     font:               { fontFamily: "Helvetica Neue" },
     height:             Ti.UI.SIZE,
+    left:               "0",
+    right:               "0",
     textAlign:          Ti.UI.TEXT_ALIGNMENT_CENTER,
-    top:                "20",
-    width:              Ti.UI.SIZE
-}
-
-/* ------ Ti.UI.Label ------ */
-".pretty-scaler": {
-    height:             0,
+    top:                "0",
     width:              Ti.UI.SIZE
 }

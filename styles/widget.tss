@@ -2,15 +2,15 @@
 ".pretty-menu": {
     layout:     "vertical",
     height:     Ti.UI.SIZE,
-    width:      Ti.UI.FILL
+    width:      Ti.UI.SIZE
 }
 
 /* ------ Ti.UI.View ------ */
 ".pretty-row": {
-    bottom:     "5",
+    bottom:     "0",
     center:     { x: "50%" },
     layout:     "horizontal",
     height:     Ti.UI.SIZE,
-    top:        "5",
+    top:        "0",
     width:      Ti.UI.SIZE
 }

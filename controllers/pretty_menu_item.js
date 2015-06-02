@@ -21,18 +21,29 @@ $.borderColorConfigured = false;
     var config = args.config;
 
     /* Space between title and bottom; and icon and top*/
-    if (config.outerPadding !== undefined) {
-        $.prettyIcon.top = $.prettyTitle.bottom = config.outerPadding;
-    }
+    if (config.paddings !== undefined) {
+        if (config.paddings.vertical !== undefined) {
+            $.prettyIcon.top = $.prettyTitle.bottom = config.paddings.vertical;
+        }
 
-    /* Space between title and icon */
-    if (config.innerPadding !== undefined) {
-        $.prettyTitle.top = config.innerPadding;
+        if (config.paddings.horizontal !== undefined) {
+            $.prettyTitle.left = $.prettyTitle.right = config.paddings.horizontal;
+            if (args.title === undefined) {
+                $.prettyIcon.left = $.prettyIcon.right = config.paddings.horizontal;
+            }
+        }
+
+        /* Space between title and icon */
+        if (config.paddings.inner !== undefined && args.title !== undefined) {
+            $.prettyTitle.top = config.paddings.inner;
+        }
     }
 
     /* Space between two items */
-    if (config.horizontalMargin !== undefined) {
-        $.prettyItem.left = $.prettyItem.right = config.horizontalMargin / 2;
+    if (config.margins !== undefined) {
+        if (config.margins.horizontal !== undefined) {
+            $.prettyItem.left = $.prettyItem.right = config.margins.horizontal / 2;
+        }
     }
 
     if (config.font !== undefined) {
@@ -49,7 +60,7 @@ $.borderColorConfigured = false;
     }
 
     if (config.width !== undefined) {
-        $.prettyScaler.width = config.width;
+        $.prettyItem.width = config.width;
 
         if (!$.fontSizeConfigured) {
             $.prettyTitle.font = {
@@ -66,15 +77,15 @@ $.borderColorConfigured = false;
         }
     }
 
-    if (config.noBorder) {
-        $.prettyItem.borderWidth = 0;
-    }
-
     if (config.border !== undefined) {
         $.borderColorConfigured = config.border.color;
         $.prettyItem.borderColor = config.border.color || $.prettyItem.borderColor;
-        $.prettyItem.borderWidth = config.border.width || $.prettyItem.borderWidth;
-        $.prettyItem.borderRadius = config.border.radius || $.prettyItem.borderRadius;
+        $.prettyItem.borderWidth = config.border.width !== undefined ? 
+            config.border.width :
+            $.prettyItem.borderWidth;
+        $.prettyItem.borderRadius = config.border.radius !== undefined ?
+            config.border.radius : 
+            $.prettyItem.borderRadius;
     }
 
     if (config.foregroundColor !== undefined) {
@@ -89,8 +100,38 @@ $.borderColorConfigured = false;
         $.prettyIcon.backgroundColor = $.prettyTitle.backgroundColor = $.prettyItem.backgroundColor = config.backgroundColor;
     }
 
+    if (config.layout === "horizontal" && args.title !== undefined) {
+        $.prettyContainer.layout = "horizontal"; 
+
+        var innerPadding = $.prettyTitle.top,
+            verticalPadding = $.prettyIcon.top,
+            horizontalPadding = $.prettyTitle.left,
+            d = Ti.Platform.displayCaps.logicalDensityFactor, 
+            iconHeight = $.prettyIcon.toImage().height / (OS_ANDROID ? d : 1);
+            titleHeight= $.prettyTitle.toImage().height / (OS_ANDROID ? d : 1);
+
+        if (iconHeight > titleHeight) {
+            $.prettyTitle.height = iconHeight;
+        } else {
+           $.prettyIcon.height = titleHeight;
+        }
+
+        $.prettyIcon.top = $.prettyIcon.bottom = verticalPadding;
+        $.prettyTitle.top = $.prettyTitle.bottom = verticalPadding;
+        $.prettyIcon.right = innerPadding;
+        $.prettyIcon.left = horizontalPadding;
+        $.prettyTitle.left = 0;
+
+
+        if (config.alignment !== undefined && config.alignment.inner !== undefined) {
+            if (config.alignment.inner === "left") { $.prettyContainer.left =  0; }
+            else if (config.alignment.inner === "right") { $.prettyContainer.right =  0; }
+        }
+    }
+
     if (args.title === undefined) {
         $.prettyTitle.height = 0;
+        $.prettyTitle.width = Ti.UI.FILL;
     }
 })(arguments[0] || {});
 
