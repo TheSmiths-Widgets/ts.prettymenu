@@ -1,9 +1,9 @@
 <Alloy>
-	<Window>
+    <Window>
         <View class="container">
-            <Widget src="ts.prettymenu" id="prettyMenu" />
-            <Widget src="ts.prettymenu" id="prettyMenu2" />
-            <Widget src="ts.prettymenu" id="prettyMenu3" />
+            <TextField class="selection" id="selection" hintText="configuration selection" />
+            <View class="preview" id="preview" />
+            <Button class="loadButton" onClick="loadConfig" title="LOAD CONFIGURATION!" />
         </View>
 	</Window>
 </Alloy>

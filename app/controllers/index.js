@@ -1,75 +1,70 @@
-$.prettyMenu.init(
-    [
-        { id: "profile", icon: "fa-eye", title: "Mijn profiel", onClick: handleClick },
-        { id: "question", icon: "fa-question", title: "Gestelde vragen", onClick: handleClick },
-        { id: "help", icon: "fa-info", title: "Help", onClick: handleClick },
-        { id: "dunno", icon: "fa-flag-o", title: "UitLoggen", onClick: handleClick  }
-    ], { 
-        foregroundColor: "#1DB7FF",
-        paddings: {
-            inner: 25,
-            vertical: 10
-        },
-        iconSize: 40,
-        margins: {
-            vertical: 5,
-            horizontal: 5
-        },
-        perRow: 2,
-        width: 80
+$.options = {
+    "systems": {
+        items: [
+            {title: "Apple", icon: "fa-apple"},
+            {title: "Windows", icon: "fa-windows"},
+            {title: "Linux", icon: "fa-linux"}
+        ], config: {
+            foregroundColor: "#7C8C0A",
+            margins: { vertical: 5, horizontal: 5 },
+            paddings: { inner: 10, vertical: 5 },
+            iconSize: 40,
+            font: { fontSize: 16 },
+            width: 80,
+            perRow: 3
+        }
+    },
+
+    "media": {
+        items: [
+            {title: "LinkedIn", icon: "fa-linkedin"},
+            {title: "Facebook", icon: "fa-facebook"},
+            {title: "Twitter", icon: "fa-twitter"},
+            {title: "Google Plus", icon: "fa-google-plus"}
+        ], config: {
+            backgroundColor: "#999999",
+            foregroundColor: "#E2E2E2",
+            margins: { vertical: 15, horizontal: 15 },
+            paddings: { inner: 10, vertical: 15, horizontal: 15 },
+            iconSize: 40,
+            font: { fontSize: 12 },
+            width: 100,
+            perRow: 2
+        }
+    },
+
+    "currency": {
+        items: [
+            {title: "Euro", icon: "fa-euro"},
+            {title: "Dollar", icon: "fa-dollar"},
+            {title: "Pound", icon: "fa-gbp"},
+            {title: "BitCoin", icon: "fa-bitcoin"}
+        ], config: {
+            backgroundColor: "#1DB7FF",
+            border: { color: "#1DB7FF" },
+            foregroundColor: "#FFFFFF",
+            layout: "horizontal",
+            alignment: { inner: "left" },
+            margins: { vertical: 1},
+            paddings: { inner: 10, vertical: 10, horizontal: 25 },
+            iconSize: 20,
+            font: { fontSize: 14 },
+            width: 200,
+        }
+    
     }
-);
 
 
-$.prettyMenu2.init(
-    [
-        { icon: "fa-question" }, 
-        { icon: "fa-futbol-o" }, 
-        { icon: "fa-gamepad" }, 
-        { icon: "fa-heart" }, 
-        { icon: "fa-cloud" },
-        { icon: "fa-train" }, 
-        { icon: "fa-bank" }, 
-        { icon: "fa-github" }, 
-        { icon: "fa-apple" }, 
-        { icon: "fa-dlfjgdlfkjg" }
-    ], {
-        backgroundColor: "#9ACD32",
-        foregroundColor: "#FFFFFF",
-        perRow: 5,
-        paddings: { vertical: 12.5 },
-        iconSize: 25,
-        width: 50
-    }
-);
+}
 
-$.prettyMenu3.init(
-    [
-        { icon: "fa-arrow-up" }, 
-        { icon: "fa-arrow-up" }, 
-        { icon: "fa-arrow-down" }, 
-        { icon: "fa-arrow-down" }, 
-        { icon: "fa-arrow-left" }, 
-        { icon: "fa-arrow-right" },
-        { icon: "fa-arrow-left" }, 
-        { icon: "fa-arrow-right" },
-        { icon: "fa-bold" }, 
-        { icon: "fa-font" }
-    ], {
-        backgroundColor: "#999999",
-        border: { radius: 12 },
-        foregroundColor: "#FFFFFF",
-        perRow: 10,
-        margins: { vertical: 50 },
-        paddings: { vertical: 4 },
-        iconSize: 15,
-        width: 25
-    }
-);
+function loadConfig() {
+    var options = $.options[$.selection.value];
+    if (options === undefined) { return; }
 
-
-function handleClick(clickEvent) {
-    Ti.API.warn(clickEvent);
+    var prettyMenu = Alloy.createWidget("ts.prettymenu");
+    prettyMenu.init(options.items, options.config);
+    $.preview.removeAllChildren();
+    $.preview.add(prettyMenu.getView());
 }
 
 $.index.open();

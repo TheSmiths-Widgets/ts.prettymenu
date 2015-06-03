@@ -1,8 +1,38 @@
-"Window": {
-    backgroundColor: "#FFFFFF"
+".container":{
+    backgroundColor: "#FFFFFF",
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL
 }
 
-".container": {
-    layout: "vertical",
-    top:    "50"
+".selection": {
+    color: "#161616",
+    height: Ti.UI.SIZE,
+    font: {
+        fontSize: 16
+    },
+    top: 0,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    width: Ti.UI.FILL
+}
+
+".preview": {
+    height: Ti.UI.SIZE,
+    top: 80,
+    width: Ti.UI.SIZE
+}
+
+".loadButton": {
+    backgroundColor: "#161616",
+    bottom: 0,
+    font: {
+        fontFamily: "Open Sans",
+        fontSize: 16
+    },
+    color: "#FFFFFF",
+    width: Ti.UI.FILL,
+    height: 50,
+}
+
+".loadButton[platform=android]": {
+    verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER
 }
