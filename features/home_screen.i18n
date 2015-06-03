@@ -2,26 +2,27 @@ Feature: Pretty Menu Visual Testing
 
 Scenario: Systems menu
     Given I am on the Home Screen
-    Then I enter "systems" into input field number 1
-    And I press the "LOAD CONFIGURATION!" button
-    And I long press "Apple"
+    Then I select the "systems" configuration
+    And I wait
+    And take picture
+    And I press "Linux"
+    And I wait
     And take picture
    
 Scenario: Media
     Given I am on the Home Screen
-    Then I enter "media" into input field number 1
-    And I press the "LOAD CONFIGURATION!" button
-    And I long press "Facebook"
+    Then I select the "media" configuration
+    And I wait
+    And take picture
+    And I press "Facebook"
+    And I wait
     And take picture
 
 Scenario: Currency
     Given I am on the Home Screen
-    Then I enter "currency" into input field number 1
-    And I press the "LOAD CONFIGURATION!" button
-    And I long press "Euro"
+    Then I select the "currency" configuration
+    And I wait
     And take picture
-
-
-
-
-
+    And I press "Euro"
+    And I wait
+    And take picture

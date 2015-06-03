@@ -31,16 +31,6 @@ function retrieveIconCode(widget, item) {
     })[0];
 }
 
-function trueSize(dim) {
-    var density = Ti.Platform.displayCaps.logicalDensityFactor;
-
-    if ( Ti.Platform.name === "android") {
-        return dim / density;
-    } else {
-        return dim;
-    }
-}
-
 describe("The pretty menu should be pretty-initialized", function() {
     beforeEach(function() {
         spyHandler = {
@@ -245,9 +235,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             var firstItem = retrieveItem(widget, 0, 0);
             expect(retrieveTitle(firstItem).bottom).toEqual(config.paddings.vertical);
             expect(retrieveIcon(firstItem).top).toEqual(config.paddings.vertical);
-
-
-            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(firstItem.width).toEqual(config.width);
         });
         it("can handle an horizontal padding", function() {
             var config = {
@@ -258,7 +246,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             var firstItem = retrieveItem(widget, 0, 0);
             expect(retrieveTitle(firstItem).right).toEqual(config.paddings.horizontal);
             expect(retrieveTitle(firstItem).left).toEqual(config.paddings.horizontal);
-            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(firstItem.width).toEqual(config.width);
         });
         it("can handle an inner padding", function() {
             var config = {
@@ -268,7 +256,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
             expect(retrieveTitle(firstItem).top).toEqual(config.paddings.inner);
-            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(firstItem.width).toEqual(config.width);
         });
         it("can handle a vertical margin", function() {
             var config = {
@@ -314,7 +302,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             widget.init(prettyMenus.classic, config);
             var firstItem = retrieveItem(widget, 0, 0);
 
-            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(firstItem.width).toEqual(config.width);
             expect(retrieveTitle(firstItem).font.fontSize).toEqual(config.width / 10);
             expect(retrieveIcon(firstItem).font.fontSize).toEqual(config.width / 3);
 
@@ -323,7 +311,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             widget.init(prettyMenus.longTitle, config);
             firstItem = retrieveItem(widget, 0, 0);
 
-            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(firstItem.width).toEqual(config.width);
 
             config = {
                 width: 140,
@@ -335,7 +323,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             widget.init(prettyMenus.classic, config);
             firstItem = retrieveItem(widget, 0, 0);
 
-            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(firstItem.width).toEqual(config.width);
             expect(retrieveTitle(firstItem).font.fontSize).toEqual(config.font.fontSize);
         });
         it("can handle a border", function() {
@@ -404,7 +392,7 @@ describe("The pretty menu should be pretty-initialized", function() {
             }
 
             expect(iconHeight).toEqual(titleHeight);
-            expect(trueSize(firstItem.toImage().width)).toEqual(config.width);
+            expect(firstItem.width).toEqual(config.width);
         });
         
 
@@ -434,19 +422,14 @@ describe("The pretty menu should be pretty-initialized", function() {
             widget.init(prettyMenus.classic, config);
             firstItem = retrieveItem(widget, 0, 0);
 
-            if (Ti.Platform.name === "android") {
-                expect(firstItem.toImage().width / density).toEqual(config.width);
-            } else {
-                expect(firstItem.toImage().width).toEqual(config.width);
-            }
-
+            expect(firstItem.width).toEqual(config.width);
             expect(retrieveTitle(firstItem).font.fontSize).toEqual(config.font.fontSize);
 
         });
     });
 
     describe("Each item is quite fancy when you tap on it", function() {
-        it("should toggle colors on while beeing pressed", function() {
+        it("should toggle colors while beeing pressed", function() {
             var config = {
                 foregroundColor: "green",
                 backgroundColor: "red"

@@ -1,5 +1,5 @@
 Given /^I am on the Home Screen$/ do
-  element_exists("view")
+    element_exists("view")
 end
 
 Then /^I fill in textarea #([0-9]+) with "(.*?)"$/ do |textareaId, content|
@@ -21,4 +21,18 @@ Then /^I take a break$/ do
     sleep(STEP_PAUSE * 1000)
 end
 
-
+Then /^I select the "(.*?)" configuration$/ do |config|
+    if which_platform == 'ios'
+        touch("textField index:0")
+        wait_for_keyboard
+        keyboard_enter_text config 
+        tap_keyboard_action_key
+        touch("view marked: 'LOAD CONFIGURATION!'")
+        sleep(STEP_PAUSE)
+    elsif which_platform == 'android'
+        enter_text("android.widget.EditText index:0", config)
+        hide_soft_keyboard
+        tap_when_element_exists("android.widget.Button {text CONTAINS[c] 'LOAD CONFIGURATION!'}")
+        sleep(1)
+    end
+end

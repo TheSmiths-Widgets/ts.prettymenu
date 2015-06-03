@@ -3,7 +3,7 @@ $.options = {
         items: [
             {title: "Apple", icon: "fa-apple"},
             {title: "Windows", icon: "fa-windows"},
-            {title: "Linux", icon: "fa-linux"}
+            {id: "linux", title: "Linux", icon: "fa-linux", onClick: toggle}
         ], config: {
             foregroundColor: "#7C8C0A",
             margins: { vertical: 5, horizontal: 5 },
@@ -18,7 +18,7 @@ $.options = {
     "media": {
         items: [
             {title: "LinkedIn", icon: "fa-linkedin"},
-            {title: "Facebook", icon: "fa-facebook"},
+            {id: "facebook", title: "Facebook", icon: "fa-facebook", onClick: toggle},
             {title: "Twitter", icon: "fa-twitter"},
             {title: "Google Plus", icon: "fa-google-plus"}
         ], config: {
@@ -35,7 +35,7 @@ $.options = {
 
     "currency": {
         items: [
-            {title: "Euro", icon: "fa-euro"},
+            {id: "euro", title: "Euro", icon: "fa-euro", onClick: toggle},
             {title: "Dollar", icon: "fa-dollar"},
             {title: "Pound", icon: "fa-gbp"},
             {title: "BitCoin", icon: "fa-bitcoin"}
@@ -58,13 +58,40 @@ $.options = {
 }
 
 function loadConfig() {
-    var options = $.options[$.selection.value];
+    var options = $.options[$.configuration.value];
     if (options === undefined) { return; }
 
     var prettyMenu = Alloy.createWidget("ts.prettymenu");
     prettyMenu.init(options.items, options.config);
     $.preview.removeAllChildren();
     $.preview.add(prettyMenu.getView());
+}
+
+function toggle(id) {
+    var rows = $.preview.children[0].children;
+    _.each(rows, function (row) {
+        _.each(row.children, function (item) {
+            var title = item.children[0].children[1],
+                icon = item.children[0].children[0];
+
+            if (title.text.toLowerCase() === id) {
+                setTimeout(function () {
+                    var foreground = title.color,
+                        background = item.backgroundColor;
+        
+                    item.backgroundColor = foreground;
+                    title.backgroundColor = foreground;
+                    icon.backgroundColor = foreground;
+                    title.color = background;
+                    icon.color = background;
+
+                    if (id !== "euro") {
+                        item.borderColor = background;
+                    }
+                }, 250);
+            }
+        })
+    });
 }
 
 $.index.open();

@@ -5,3 +5,7 @@ end
 def wait_for_animation
   sleep(0.6)
 end
+
+def which_platform
+   return "android"
+end

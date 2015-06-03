@@ -1,7 +1,7 @@
 <Alloy>
     <Window>
         <View class="container">
-            <TextField class="selection" id="selection" hintText="configuration selection" />
+            <TextField class="configuration" id="configuration" hintText="configuration" />
             <View class="preview" id="preview" />
             <Button class="loadButton" onClick="loadConfig" title="LOAD CONFIGURATION!" />
         </View>

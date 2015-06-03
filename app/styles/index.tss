@@ -1,10 +1,15 @@
+"Window": {
+    backgroundColor: "#FFFFFF",
+}
+
 ".container":{
     backgroundColor: "#FFFFFF",
     height: Ti.UI.FILL,
+    top: 50,
     width: Ti.UI.FILL
 }
 
-".selection": {
+".configuration": {
     color: "#161616",
     height: Ti.UI.SIZE,
     font: {
