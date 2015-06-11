@@ -27,7 +27,7 @@ details and options.
 ```javascript
 
 function handleClick (id) {
-    Ti.API.alert("Menu " + id + "clicked!");
+    alert("Menu " + id + "clicked!");
 }
 
 $.prettyMenu.init(
