@@ -3,7 +3,7 @@
 	"name": "ts.prettymenu",
 	"description" : "Fancy menu for your app with FontAwesome",
 	"author": "The Smiths [Matthias Benkort]",
-	"version": "1.2",
+	"version": "2.2",
 	"copyright":"Copyright (c) 2015",
 	"license":"Apache",
 	"min-alloy-version": "1.0",
