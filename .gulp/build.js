@@ -5,6 +5,8 @@ module.exports = function (gulp, plugins) {
 
         /* Start TiShadow Server */
         plugins.exec('tishadow server').stdout.on('data', function (data) {
+            process.stdout.write(data);
+
             /* Watch for the server starts */
             var ip = data.match(/\[DEBUG\] connect to ((\d+\.?){4}):\d+/);
             if (ip !== null) {
@@ -12,19 +14,20 @@ module.exports = function (gulp, plugins) {
             }
 
             /* Watch for the simulator to be ready */
-            if (data.match(/\[INFO\] \[\S+, \S+, \S+\] \S+ launched\./) !== null) {
+            if (data.match(/INFO[\s\S]+launched\./) !== null) {
                 done();
-                done = function () { };
+                done = function () {};
             }
 
             /* Watch for fail tests */
             failure = failure || (data.match(/FAIL[\s\S]+failed/) !== null);
 
             /* Watch for jasmine to end */
-            if (data.match(/\[TEST\] \[\S+, \S+, \S+\] Runner Finished/) !== null) {
+            if (data.match(/TEST[\s\S]+Runner Finished/) !== null) {
                 if (failure) { return plugins.utils.abort('Jasmine tests failed'); }
                 plugins.utils.env.jasmine();
     	        plugins.utils.clean_env();
+                process.exit(0);
             }
         });
     });
