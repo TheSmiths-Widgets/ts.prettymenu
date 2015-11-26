@@ -136,6 +136,7 @@ $.borderColorConfigured = false;
 })(arguments[0] || {});
 
 $.prettyItem.addEventListener("touchstart", toggleColors);
+$.prettyItem.addEventListener("touchcancel", toggleColors);
 $.prettyItem.addEventListener("touchend", toggleColors);
 function toggleColors() {
     /* Just hide the element to avoid tint */
